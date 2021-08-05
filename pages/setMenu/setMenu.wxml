@@ -1,0 +1,50 @@
+<!-- 页头 -->
+<view class="yui-default-bg">
+  <pageTitle title="想吃菜单" />
+  <view wx:if="{{list.length==0}}" class="yui-word-color-tip yui-pb1">当前还没创建菜单哦~快在下方创建吧！</view>
+</view>
+
+<!-- 当前菜单 -->
+<view class="menu yui-default-bg yui-default-shadow yui-default-radius" wx:if="{{list.length!=0}}">
+  <view class="yui-small-title yui-mb1"><text style="font-size: 2rem">{{list.length}}</text>项</view>
+  <!-- 临时解决iOS下此块高度影响textarea内容问题 -->
+  <scroll-view scroll-y="true" style="height: 233px">
+    <view class="item" wx:for="{{list}}" wx:key="key">{{item}}</view>
+  </scroll-view>
+  <view wx:if="{{logs.length!=0}}" class="yui-text-center yui-mt1">
+    <button class="mini-btn" type="primary" size="mini" style="color: #f5f5f7;margin-right: .25rem;" bindtap="addToArray">保存菜单</button>
+    <button class="mini-btn" type="default" size="mini" style="color: #1d1d1f" bindtap="delFoodList">清空菜单</button>
+  </view>
+</view>
+
+<!-- 管理菜单 -->
+<view class="manager">
+  <view class="add-input yui-default-bg yui-default-shadow yui-default-radius">
+    <textarea value="{{text}}" auto-height bindinput="dueInput" placeholder="请输入想吃的(以空格分开）" maxlength="-1" />
+    <view class="yui-text-center yui-word-color-tip yui-pb1 yui-pt1">在上方输入想吃的餐厅或菜(以空格分开）</view>
+  </view>
+</view>
+
+<!-- 多个菜单 -->
+<view class="moreMenu" wx:if="{{foodArray.length!=0}}">
+  <view class="yui-small-title yui-mb1">更多菜单</view>
+  <view class="item yui-default-bg yui-default-shadow yui-default-radius" wx:for="{{foodArray}}" wx:key="key"> 
+    <!-- 顶部 -->
+    <view class="head yui-mb1">
+      <!-- 菜单名 -->
+      <view class="name">{{item.name}}</view>
+      <!-- 主菜单标识 -->
+      <view class="mainMenu"></view>
+    </view>
+    
+    <!-- 菜单内容 -->
+    <view class="content yui-mb1"><text wx:for="{{item.list}}" wx:for-item="sub" wx:key="key">{{sub}} </text></view>
+    <!-- 按钮组 -->
+    <view class="btngroup">
+      <!-- 切换为主菜单 -->
+      <button class="mini-btn" type="primary" size="mini" style="color: #f5f5f7;margin-right: .25rem;" bindtap="addToArray">切换为主菜单</button>
+      <!-- 删除菜单 -->
+      <button class="mini-btn" type="default" size="mini" style="color: #1d1d1f" bindtap="delFoodList">删除菜单</button>
+    </view>
+  </view>
+</view>

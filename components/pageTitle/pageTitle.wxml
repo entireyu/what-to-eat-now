@@ -1,0 +1,10 @@
+<!--components/pageTitle/pageTitle.wxml-->
+<view class="container">
+  <view class="yui-page-title">
+    {{title}}
+  </view>
+  <view class="yui-page-title-shadow">
+    {{title}}
+  </view>
+</view>
+

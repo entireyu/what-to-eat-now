@@ -1,0 +1,20 @@
+/* 
+此文件为开发者工具生成，生成时间: 2021/8/5 上午11:45:09
+使用方法：
+在 editMenu.wxss 文件末尾引入样式
+```
+@import "./editMenu-wxa-auto-dark.wxss";
+```
+ */
+
+@media (prefers-color-scheme: dark) {
+    .menu .item {
+        background-color: rgb(18, 30, 38);
+        border: rgb(0, 0, 0);
+        color: rgb(0, 102, 176);
+    }
+
+    .userinput {
+        border: rgb(0, 0, 0);
+    }
+}

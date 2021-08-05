@@ -1,0 +1,52 @@
+/* pages/setFood/setFood.wxss */
+.manager{
+  margin: 1rem;
+}
+.add-input{
+  /* margin: 1rem; */
+  width: 100%;
+  overflow: hidden;
+}
+.add-input textarea{
+  background-color: #fff;
+  /* padding: 1rem; */
+  padding: 1rem;
+  width: 100%;
+}
+.btn{
+  text-align: center;
+}
+.menu {
+  margin: 1rem;
+  padding: 1rem;
+  overflow: hidden;
+}
+.menu .item{
+  display: inline-block;
+  margin-right: 1rem;
+  padding: .25rem .5rem;
+  background-color: #e3f2fd;
+  border: 1px solid #42a5f5;
+  letter-spacing: .1rem;
+  text-indent: .1rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #42a5f5;
+  font-size: smaller;
+}
+.moreMenu{
+  margin: 1rem;
+  margin-top: 2.33rem;
+}
+.moreMenu .item{
+  padding: 1rem;
+}
+.moreMenu .head{
+  display: flex;
+  justify-content: space-between;
+}
+.moreMenu .name{
+  font-weight: 700;
+  font-size: large;
+}
+
