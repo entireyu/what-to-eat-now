@@ -1,4 +1,83 @@
 /**app.wxss**/
+/* 配置每个页面的参数 */
 page{
+  /* 背景颜色 */
   background-color: #f5f5f7;
+  /* 默认文字颜色 */
+  color: #1d1d1f;
+  /* 相对布局 */
+  position: relative;
+  /* 底部空间 */
+  padding-bottom: 2rem;
 }
+/* 文字提示颜色 */
+.yui-word-color-tip{
+  color: #86868b;
+}
+/* 默认背景颜色 */
+.yui-default-bg{
+  background-color: #ffffff;
+}
+/* 默认圆角 */
+.yui-default-radius{
+  border-radius: 15px;
+}
+/* 默认阴影 */
+.yui-default-shadow{
+  box-shadow: 4px 4px 10px 0 rgba(55,99,170,.1), -4px -4px 10px 0 #fff;
+}
+/* 小标题 */
+.yui-small-title{
+  font-size: large;
+  font-weight: 700;
+  letter-spacing: .2rem;
+}
+/* 默认右侧小图片 */
+.yui-right-image{
+  position: absolute;
+  right: -15px;
+  bottom: -15px;
+  height: 4rem;
+  width: 4rem;
+  opacity: .66;
+}
+/* 外底部边距1rem */
+.yui-mb1{
+  margin-bottom: 1rem;
+}
+/* 内底部边距1rem */
+.yui-pb1{
+  padding-bottom: 1rem;
+}
+/* 外边距顶部1rem */
+.yui-mt1{
+  margin-top: 1rem;
+}
+/* 内边距顶部1rem */
+.yui-pt1{
+  padding-top: 1rem;
+}
+
+/* 文字居中 */
+.yui-text-center{
+  text-align: center;
+}
+.yui-base-card{
+  margin: 1rem;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.yui-fontSize-large{
+  font-size: large;
+}
+.yui-fontSize-small{
+  font-size: small;
+}
+.yui-split-line{
+  padding: 1rem 0;
+}
+.yui-split-line .dashed{
+  border-top: 2px dashed #eee;
+}
+@import 'app-wxa-auto-dark.wxss'

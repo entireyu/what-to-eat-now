@@ -1,1 +1,78 @@
 /**index.wxss**/
+.link {
+  margin: 2rem 1rem;
+  padding: 1rem;
+  padding-left: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.hover{
+  background-image: linear-gradient(0deg,#fff,#f3f5f8);
+}
+.btn{
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  
+  
+  height: 200rpx;
+  width: 200rpx;
+  margin: 2rem auto;
+  
+}
+.btn .word{
+  text-shadow: 0 0 5px 0 #4e4e4e;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f5f5f7;
+  letter-spacing: .25rem;
+  text-indent: .25rem;
+}
+.btn .bg{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background-image: linear-gradient(0deg, #ffc3a0 0%, #ffafbd 100%);
+  z-index: -1;
+  box-shadow: 0 0 3px 0 #ffafbcbe;
+  animation: roundRotate 3s ease-in-out infinite;
+}
+/* 按钮旋转起来 */
+@keyframes roundRotate {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
+}
+
+.result{
+  position: relative;
+  overflow: hidden;
+  margin: 2rem 1rem;
+  padding: 1rem 2rem;
+}
+.status{
+  text-align: center;
+}
+.log{
+  margin: 2rem 1rem;
+  padding: 2rem;
+  
+}
+.log .log-item{
+  margin-bottom: .5rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px dashed #e6e6e6;
+  display: flex;
+  justify-content: space-between;
+}
+.result .show{
+  position: relative;
+  z-index: 1;
+  border-radius: 3px;
+  background-color: #f5f5f7;
+  padding: 1rem;
+  box-shadow: inset 5px 5px 5px #e6e6e6, inset -5px -5px 5px #e6e6e6;
+}

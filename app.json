@@ -1,13 +1,15 @@
 {
-  "pages":[
+  "pages": ["pages/setMenu/setMenu","pages/editMenu/editMenu",
     "pages/index/index",
-    "pages/logs/logs"
+    
+    "pages/share/share"
+    
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "这顿吃什么",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

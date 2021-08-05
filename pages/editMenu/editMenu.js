@@ -56,27 +56,6 @@ Page({
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-  /**
    * 处理用户输入
    */
   dueInput(e){
@@ -94,25 +73,49 @@ Page({
    * 保存菜单
    */
   saveMenu(){
-    
+    wx.setStorageSync('menuList', this.data.menuList)
   },
   /**
    * 创建新菜单
    */
   createNewMenu(){
-
+    let newMenu = {
+      name: this.data.name,
+      menu: this.data.menu
+    }
+    this.data.menuList.push(newMenu);
+    this.saveMenu()
   },
   /**
    * 修改目标菜单
    */
   editTargetMenu(id){
-
+    let newMenu = {
+      name: this.data.name,
+      menu: this.data.menu
+    }
+    this.data.menuList[id] = newMenu;
+    this.saveMenu();
   },
   /**
    * 用户点击保存菜单
    */
   userClickSave(){
-
+    if(this.data.name==null){
+      wx.showToast({
+        title: '请填写菜单名',
+        icon: "none"
+      })
+    }else if(this.data.mode==null){
+      this.createNewMenu();
+    }else if(this.data.mode!=null){
+      this.editTargetMenu(this.data.mode);
+    }else{
+      wx.showToast({
+        title: '未知错误，请返回重试',
+        icon: "none"
+      })
+    }
   },
   /**
    * 用户点击返回(即不保存返回)

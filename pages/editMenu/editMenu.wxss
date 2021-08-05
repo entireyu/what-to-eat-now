@@ -26,6 +26,6 @@
   background-color: #42a5f5;
 }
 .btnGroup button[type='default']{
-  color: #1d1d1f;
+  color: #1d1d1f!important;
 }
 @import 'editMenu-wxa-auto-dark.wxss'
