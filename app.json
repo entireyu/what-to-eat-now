@@ -7,12 +7,11 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "@navBgColor",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "这顿吃什么",
-    "navigationBarTextStyle": "@navTxtStyle"
+    "navigationBarTextStyle": "black"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  "themeLocation":"theme.json",
-  "darkmode": true
+  "themeLocation":"theme.json"
 }

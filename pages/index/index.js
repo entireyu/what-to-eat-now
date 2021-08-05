@@ -211,8 +211,14 @@ Page({
    */
   toShare(e){
     let key = e.currentTarget.dataset.result;
-    wx.navigateTo({
-      url: '../share/share',
-    })
+    if(this.data.status=="抽取完成！")
+      wx.navigateTo({
+        url: '../share/share?key='+key,
+      })
+    else
+      wx.showToast({
+        title: '请抽取后分享',
+        icon: "none"
+      })
   }
 })

@@ -13,16 +13,17 @@
   </view>
   <view class="yui-word-color-tip yui-text-center yui-fontSize-small yui-mt1">点击上方框框可进行分享</view>
   <image src="../images/meat.svg" class="yui-right-image"></image>
-  </view>
-  <!-- 状态 -->
-  <!-- <view class="status" wx:if="{{status!='待抽奖'}}">
-    {{status}}
-  </view> -->
   <!-- 抽奖按钮 -->
   <view class="btn" bindtap="checkList">
     <view class="bg"></view>
     <view class="word">抽取</view>
   </view>
+  </view>
+  <!-- 状态 -->
+  <!-- <view class="status" wx:if="{{status!='待抽奖'}}">
+    {{status}}
+  </view> -->
+  
   <!-- 控制面板 -->
   <view class="controll yui-base-card yui-default-bg yui-default-shadow yui-default-radius">
     <view class="yui-small-title yui-mb1">控制面板</view>

@@ -32,4 +32,3 @@
   padding: .5rem 1rem;
   border: 1px solid #eee;
 }
-@import 'editMenu-wxa-auto-dark.wxss'

@@ -12,7 +12,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(options.key) this.setData({keyword: options.key})
+    if(options.key){
+      this.setData({keyword: decodeURIComponent(options.key)})
+    }
+
   },
 
   /**
