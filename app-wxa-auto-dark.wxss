@@ -18,7 +18,7 @@
     }
 
     .yui-default-bg {
-        background-color: rgb(17, 17, 17);
+        background-color: #232838;
     }
 
     .yui-default-shadow {

@@ -1,16 +1,18 @@
 {
-  "pages": ["pages/setMenu/setMenu","pages/editMenu/editMenu",
-    "pages/index/index",
-    
-    "pages/share/share"
+  "pages": [
+    "pages/index/index","pages/editMenu/editMenu",
+    "pages/share/share",
+    "pages/setMenu/setMenu"
     
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "@navBgColor",
     "navigationBarTitleText": "这顿吃什么",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "@navTxtStyle"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "themeLocation":"theme.json",
+  "darkmode": true
 }

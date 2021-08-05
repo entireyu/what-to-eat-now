@@ -1,2 +1,16 @@
 <!--pages/share/share.wxml-->
-<text>pages/share/share.wxml</text>
+
+<view wx:if="{{keyword}}" class="yui-base-card yui-default-bg yui-default-radius">
+  <view class="main">
+    <text class="des" style="text-align: left;">这顿吃\n</text>
+    <text class="keyword">{{keyword}}\n</text>
+    <text class="bottom">一起去干饭吧</text>
+    <image src="/pages/images/dianzhen.svg"></image>
+  </view>
+</view>
+
+<view wx:if="{{!keyword}}" class="yui-default-bg yui-base-card yui-default-radius yui-text-center">
+  <icon class="icon-box-img" type="info" size="93"></icon>
+  <view class="mark yui-fontSize-large yui-small-title">数据错误</view>
+  <view class="yui-word-color-tip">请点击左上角返回首页</view>
+</view>

@@ -6,9 +6,7 @@
   position: relative;
   overflow: hidden;
 }
-.hover{
-  background-image: linear-gradient(0deg,#fff,#f3f5f8);
-}
+
 .btn{
   display: flex;
   position: relative;

@@ -9,16 +9,14 @@ Page({
     result: "请点击下方按钮进行抽取",
     // 当前抽奖列表
     list: [],
+    // 菜单名称
+    name: null,
     // 抽奖状态
     status: "待抽奖",
-    // 菜单列表
-    menuList: [],
-    // 主菜单
-    mainMenu: [],
     // 历史记录
     logs: [],
     // 不放回抽样
-    notRepeat: true,
+    notRepeat: false,
     // 提示
     tip: null
   },
@@ -84,14 +82,11 @@ Page({
     var number = parseInt((Math.random() * (foodList.length - 1)).toFixed(0));
     // 结果
     var result = foodList[number];
-    // 检测是否为不放回抽样
-    if(this.data.notRepeat){
-      
-    }
+    
     // 抽取效果
     var i = 0;
     // 效果持续时间
-    var time = 3000;
+    var time = 2000;
     // 计时器：循环展示菜单
     var timeInt = setInterval(()=>{
       this.setData({ result: foodList[i] });
@@ -104,6 +99,13 @@ Page({
     // 指定时间后停止抽奖
     setTimeout(()=>{
       clearInterval(timeInt);
+      // 检测是否为不放回抽样
+      if(this.data.notRepeat){
+        // 不放回抽样
+        let menuList = this.data.list;
+        menuList.splice(number,1)
+        this.setData({list: menuList});
+      }
       this.showResult(result);
     },time)
 
@@ -122,7 +124,7 @@ Page({
     this.setData({ status: "抽取完成！", result: result })
     this.saveLog(result)
     wx.showModal({
-      title: "这顿吃这个可好？",
+      title: "这顿吃这个好不？",
       content: result,
       showCancel: false
     })
@@ -145,12 +147,6 @@ Page({
         icon: "none"
       })
     }
-  },
-  /**
-   * 初始化菜单数据
-   */
-  initMenu(){
-    
   },
   /**
    * 保存抽奖记录
@@ -188,8 +184,10 @@ Page({
    * 加载美食列表
    */
   loadFoodList() {
-    const food = wx.getStorageSync('food') || [];
-    this.setData({ list: food })
+    let menuList = wx.getStorageSync('menuList');
+    let mainIndex = wx.getStorageSync('mainMenu') || 0;
+    let menu = menuList[mainIndex]
+    this.setData({ list: menu.list, name: menu.name })
   },
   /**
    * 清除所有历史记录
@@ -206,6 +204,15 @@ Page({
         } else if (res.cancel) {
         }
       }
+    })
+  },
+  /**
+   * 分享
+   */
+  toShare(e){
+    let key = e.currentTarget.dataset.result;
+    wx.navigateTo({
+      url: '../share/share',
     })
   }
 })

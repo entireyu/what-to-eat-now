@@ -23,8 +23,13 @@ Page({
   onLoad: function (options) {
     // 获取需要操作的菜单id
     let id = options.id;
-    if(options.id)
+    if(options.id){
       this.setData({mode: id})
+      this.loadMenu();
+    }else{
+      this.loadMenuList();
+    }
+      
   },
 
   /**
@@ -81,7 +86,7 @@ Page({
   createNewMenu(){
     let newMenu = {
       name: this.data.name,
-      menu: this.data.menu
+      list: this.data.menu
     }
     this.data.menuList.push(newMenu);
     this.saveMenu()
@@ -92,7 +97,7 @@ Page({
   editTargetMenu(id){
     let newMenu = {
       name: this.data.name,
-      menu: this.data.menu
+      list: this.data.menu
     }
     this.data.menuList[id] = newMenu;
     this.saveMenu();
@@ -108,8 +113,10 @@ Page({
       })
     }else if(this.data.mode==null){
       this.createNewMenu();
+      wx.navigateBack()
     }else if(this.data.mode!=null){
       this.editTargetMenu(this.data.mode);
+      wx.navigateBack()
     }else{
       wx.showToast({
         title: '未知错误，请返回重试',
@@ -130,5 +137,37 @@ Page({
         }
       }
     })
+  },
+  /** 
+   * 读取菜单数据
+   */ 
+  loadMenu(){ 
+    let menuList = wx.getStorageSync('menuList')
+    let menu = menuList[this.data.mode]
+    this.setData({
+      menuList: menuList,
+      menu: menu.list,
+      name: menu.name
+    })
+    var text = ""; 
+    for(var i = 0;i<menu.list.length;i++){ 
+      if(i+1!=menu.list.length) 
+        text += menu.list[i] + " " 
+      else 
+        text += menu.list[i] 
+    } 
+    this.setData({userInput: text}) 
+  }, 
+  /**
+   * 绑定菜单名称
+   */
+  dueName(e){
+    this.setData({name: e.detail.value})
+  },
+  /**
+   * 获取菜单列表
+   */
+  loadMenuList(){
+    this.setData({menuList: wx.getStorageSync('menuList')})
   }
 })

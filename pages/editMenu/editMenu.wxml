@@ -6,9 +6,9 @@
 
 <!-- 表单 -->
 <view class="form yui-default-bg yui-default-radius yui-base-card">
+  <view class="yui-fontSize-large">菜单名称:</view>
   <view class="name">
-    菜单名称
-    <input type="text" placeholder="请输入菜单名" />
+    <input type="text" placeholder="请输入菜单名" value="{{name}}" bindinput="dueName" />
   </view>
   <view class="yui-split-line">
     <view class="dashed"></view>
@@ -24,14 +24,14 @@
     <view class="dashed"></view>
   </view>
   <view class="userinput">
-    <textarea value="{{userinput}}" auto-height bindinput="dueInput" placeholder="请输入想吃的(以空格分开）" maxlength="-1" />
+    <textarea value="{{userInput}}" auto-height="true" bindinput="dueInput" placeholder="请输入想吃的(以空格分开）" maxlength="-1" />
   </view>
   <view class="yui-text-center yui-fontSize-small yui-word-color-tip yui-pb1 yui-pt1">在上方输入想吃的餐厅或菜(以空格分开）</view>
 </view>
 
 <!-- 操作 -->
 <view class="btnGroup">
-  <button type="primary">保存菜单</button>
+  <button type="primary" bindtap="userClickSave">保存菜单</button>
   <view class="yui-mt1"></view>
   <button type="default" bindtap="userClickBack">返回</button>
 </view>

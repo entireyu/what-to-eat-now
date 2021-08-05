@@ -5,183 +5,84 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: [],
-    text: "",
-    foodArray: [],
-    menuName: "",
-    mainMenu: null
+    // 主菜单值
+    mainMenuIndex: 0,
+    // 主菜单
+    mainMenu: null,
+    // 菜单列表
+    menuList: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.loadFoodList();
-    this.loadFoodListArray();
+    this.initData();
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    this.saveFoodList();
-    this.saveFoodListArray();
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    this.saveFoodList();
-    // this.saveFoodListArray();
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
 
   },
-
+  onShow: function () {
+    this.initData()
+  },
   /**
-   * 页面上拉触底事件的处理函数
+   * 初始化
    */
-  onReachBottom: function () {
-
+  initData(){
+    this.loadMenuList();
+    this.loadMainMenu();
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-  /**
-   * 处理用户输入
-   */
-  dueInput(e){
-    var detail = e.detail;
-    var list = detail.value.split(" ")
-    // 取出空元素
-    for(let i = 0;i<list.length;i++){
-      if(list[i]=="" || list[i]==" "){
-        list.splice(i, 1);
-        i--;
-      }
-    }
-    this.setData({list: list});
-  },
-  /**
-   * 保存菜单数据
-   */
-  saveFoodList(){
-    const list = this.data.list;
-    wx.setStorageSync('food', list)
-  },
-  /**
-   * 读取菜单数据
-   */
-  loadFoodList(){
-    const food = wx.getStorageSync('food') || [];
-    this.setData({list: food})
-    var text = "";
-    for(var i = 0;i<food.length;i++){
-      if(i+1!=food.length)
-        text += food[i] + " "
-      else
-        text += food[i]
-    }
-    this.setData({text: text})
-  },
-  /**
-   * 删除菜单数据
-   */
-  delFoodList(){
-    var that = this;
-    wx.showModal({
-      title: "提示",
-      content: "确定清空菜单？",
-      success(res) {
-        if (res.confirm) {
-          wx.setStorageSync('food', [])
-          that.loadFoodList();
-        } else if (res.cancel) {
-        }
-      }
-    })
-  },
   /**
    * 加载菜单列表
    */
-  loadFoodListArray(){
-    const foodArray = wx.getStorageSync('foodArray') || [];
-    console.log(foodArray)
+  loadMenuList(){
+    const menuList = wx.getStorageSync('menuList') || [];
     this.setData({
-      foodArray: foodArray
+      menuList: menuList
     })
   },
   /**
    * 保存菜单列表
    */
-  saveFoodListArray(){
-    wx.setStorageSync('foodArray', this.data.foodArray)
-  },
-  /**
-   * 添加到菜单列表
-   */
-  addToArray(){
-    let obj = {
-      name: "",
-      list: this.data.list
-    }
-    wx.showModal({
-      title: "创建新菜单",
-      content: "",
-      editable: true,
-      placeholderText: "请输入菜单名",
-      confirmText: "创建",
-      success: (res)=>{
-        if(res.confirm){
-          obj.name = res.content
-          this.data.foodArray.push(obj);
-          this.saveFoodListArray()
-          this.loadFoodListArray()
-        }else if(res.cancel){
-
-        }
-      }
-    })
+  saveMenuList(){
+    wx.setStorageSync('menuList', this.data.menuList)
   },
   /**
    * 获取主菜单
    */
-  getMainMenu(){
-    var main = wx.getStorageSync('mainMenu');
-    this.setData({mainMenu: main});
+  loadMainMenu(){
+    var main = wx.getStorageSync('mainMenu') || 0;
+    this.setData({mainMenuIndex: main,mainMenu: this.data.menuList[main]});
   },
   /**
    * 设置主菜单
    */
-  setMainMenu(e){
+  saveMainMenu(e){
     var index = e.currentTarget.dataset.id;
     wx.setStorageSync('mainMenu', index);
-    this.getMainMenu();
+    this.loadMainMenu();
   },
   /**
    * 删除菜单
    */
   delMenu(e){
+    // 要删除菜单的id
     var index = e.currentTarget.dataset.id;
-    var main = this.data.mainMenu;
+    // 当前主菜单的id
+    var main = this.data.mainMenuIndex;
+    // 无法删除主菜单
     if(index==main){
       wx.showModal({
         showCancel: false,
@@ -189,12 +90,34 @@ Page({
         content: "无法删除主菜单"
       })
     }else if(index<main){
-      var menuList = this.data.foodArray;
-      menuList.splice(index,1);
-      this.setData({foodArray: menuList});
-      this.saveFoodListArray();
+      // 如果删除菜单的值小于主菜单的值，主菜单的值减一
+      this.data.menuList.splice(index,1);
+      this.saveMenuList();
       main--;
-      this.setMainMenu(main);
+      this.saveMainMenu(main);
+      this.loadMenuList();
+    }else{
+      // 删除
+      this.data.menuList.splice(index,1);
+      this.saveMenuList();
+      this.loadMenuList();
     }
+  },
+  /**
+   * 编辑操作 - 跳转编辑菜单页面
+   */
+  editMenu(e){
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '../editMenu/editMenu?id=' + id,
+    })
+  },
+  /**
+   * 创建新菜单
+   */
+  createMenu(){
+    wx.navigateTo({
+      url: '../editMenu/editMenu',
+    })
   }
 })

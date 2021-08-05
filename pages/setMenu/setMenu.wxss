@@ -1,18 +1,5 @@
 /* pages/setFood/setFood.wxss */
-.manager{
-  margin: 1rem;
-}
-.add-input{
-  /* margin: 1rem; */
-  width: 100%;
-  overflow: hidden;
-}
-.add-input textarea{
-  background-color: #fff;
-  /* padding: 1rem; */
-  padding: 1rem;
-  width: 100%;
-}
+
 .btn{
   text-align: center;
 }
@@ -49,4 +36,20 @@
   font-weight: 700;
   font-size: large;
 }
+.mainMenu .tag{
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #42a5f5;
+  color: #fff;
+  padding: .35rem .75rem;
+  border-radius: 0 0 0 15px;
+  font-size: smaller;
+}
 
+.mini-btn[type="main"]{
+  background-color: #42a5f5;
+}
+.btn-hover{
+  background-color: #42a4f5ce;
+}

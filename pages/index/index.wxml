@@ -8,7 +8,7 @@
   <!-- 结果区域 -->
   <view class="result yui-default-bg yui-default-shadow yui-default-radius">
   <view class="yui-small-title yui-mb1 yui-text-center">这顿吃</view>
-  <view class="show yui-text-center">
+  <view class="show yui-text-center" data-result="{{result}}" bindtap="toShare">
     {{result}}
   </view>
   <view class="yui-word-color-tip yui-text-center yui-fontSize-small yui-mt1">点击上方框框可进行分享</view>
@@ -27,12 +27,12 @@
   <view class="controll yui-base-card yui-default-bg yui-default-shadow yui-default-radius">
     <view class="yui-small-title yui-mb1">控制面板</view>
     <view class="yui-fontSize-large yui-mb1">不放回抽取： <switch bindchange="setNotRepeat" checked="{{notRepeat}}" color="#01aaed" /></view>
-    <view wx:if="{{notRepeat==true}}"><button class="mini-btn" type="default" size="mini" style="color: #1d1d1f" bindtap="resetList">重置</button></view>
+    <view wx:if="{{notRepeat==true}}"><button class="mini-btn" type="default" size="mini" style="color: #1d1d1f" bindtap="loadFoodList">恢复所有菜单项</button></view>
     <image src="../images/controll.svg" class="yui-right-image"></image>
   </view>
   <!-- 显示菜单 -->
-  <view class="menu yui-base-card yui-default-bg yui-default-shadow yui-default-radius">
-    <view class="yui-small-title yui-mb1">菜单 · {{}}</view>
+  <view class="menu yui-base-card yui-default-bg yui-default-shadow yui-default-radius" wx:if="{{list.length>0}}">
+    <view class="yui-small-title yui-mb1">菜单 · {{name}}</view>
     <view class="content"><text class="item" wx:for="{{list}}" wx:key="key">{{item}} </text></view>
     <view class="yui-word-color-tip yui-text-center yui-fontSize-small yui-mt1">{{notRepeat==true?'不放回抽取，剩余': '共'}} {{list.length}} 项</view>
     <image src="../images/menu.svg" class="yui-right-image"></image>

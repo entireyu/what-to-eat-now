@@ -15,7 +15,7 @@
 }
 /* 用户输入框 */
 .userinput{
-  padding: 1rem;
+  padding: .5rem 1rem;
   border: 1px solid #eee;
 }
 .userinput textarea{
@@ -27,5 +27,9 @@
 }
 .btnGroup button[type='default']{
   color: #1d1d1f!important;
+}
+.name{
+  padding: .5rem 1rem;
+  border: 1px solid #eee;
 }
 @import 'editMenu-wxa-auto-dark.wxss'
