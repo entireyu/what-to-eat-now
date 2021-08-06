@@ -7,7 +7,7 @@
 为了让选择困难症的小伙伴在选择吃什么的问题上更快的找到解决办法——抽取美食
 
 ## 设想架构
-![设想架构图](https://github.com/entireyu/what-to-eat-now/blob/master/image-20210806010357967.png)
+![设想架构图](image-20210806010357967.png)
 
 ## 特色
 

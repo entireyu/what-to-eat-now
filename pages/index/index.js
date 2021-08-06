@@ -1,6 +1,4 @@
 // index.js
-// 获取应用实例
-const app = getApp()
 const util = require('../../utils/util.js')
 
 Page({
@@ -32,9 +30,9 @@ Page({
     // 首次提示
     this.showTipByTime();
     // 十秒检测一次时间并生成提示
-    setInterval(()=>{
+    setInterval(() => {
       this.showTipByTime();
-    },10000)
+    }, 10000)
   },
   /**
  * 生命周期函数--监听页面显示
@@ -46,7 +44,7 @@ Page({
   /**
    * 根据时间展示提示
    */
-  showTipByTime: function(){
+  showTipByTime: function () {
     // 获取当前小时
     let nowHour = (new Date()).getHours();
 
@@ -54,21 +52,21 @@ Page({
     let tip = null;
 
     // 时间判断
-    if(nowHour>=7&&nowHour<10){
+    if (nowHour >= 7 && nowHour < 10) {
       tip = "早上好，\n用早餐开启元气满满的一天吧！"
-    }else if(nowHour>=10&&nowHour<14){
+    } else if (nowHour >= 10 && nowHour < 14) {
       tip = "又快到午餐时间啦，\n吃什么好呢？"
-    }else if(nowHour>=14&&nowHour<17){
+    } else if (nowHour >= 14 && nowHour < 17) {
       tip = "累了吗？\n来个下午茶补充精力吧"
-    }else if(nowHour>=17&&nowHour<21){
+    } else if (nowHour >= 17 && nowHour < 21) {
       tip = "晚饭时间到！\n好多好吃的呀"
-    }else if(nowHour>=21){
+    } else if (nowHour >= 21) {
       tip = "夜幕降临，\n 是不是饿了~嘿嘿"
     }
 
     // 传参
-    if(this.data.tip != tip)
-      this.setData({tip: tip});
+    if (this.data.tip != tip)
+      this.setData({ tip: tip });
   },
   /**
    * 抽取美食
@@ -82,45 +80,45 @@ Page({
     var number = parseInt((Math.random() * (foodList.length - 1)).toFixed(0));
     // 结果
     var result = foodList[number];
-    
+
     // 抽取效果
     var i = 0;
     // 效果持续时间
     var time = 2000;
     // 计时器：循环展示菜单
-    var timeInt = setInterval(()=>{
+    var timeInt = setInterval(() => {
       this.setData({ result: foodList[i] });
       i++;
       if (i == foodList.length) {
         i = 0;
       }
-    },100)
+    }, 100)
 
     // 指定时间后停止抽奖
-    setTimeout(()=>{
+    setTimeout(() => {
       clearInterval(timeInt);
       // 检测是否为不放回抽样
-      if(this.data.notRepeat){
+      if (this.data.notRepeat) {
         // 不放回抽样
         let menuList = this.data.list;
-        menuList.splice(number,1)
-        this.setData({list: menuList});
+        menuList.splice(number, 1)
+        this.setData({ list: menuList });
       }
       this.showResult(result);
-    },time)
+    }, time)
 
   },
   /**
    * 设置不放回抽样
    */
-  setNotRepeat(e){
+  setNotRepeat(e) {
     var value = e.detail.value;
-    this.setData({notRepeat: value})
+    this.setData({ notRepeat: value })
   },
   /**
    * 显示结果
    */
-  showResult(result){
+  showResult(result) {
     this.setData({ status: "抽取完成！", result: result })
     this.saveLog(result)
     wx.showModal({
@@ -129,6 +127,7 @@ Page({
       showCancel: false
     })
   },
+
   /**
    * 检查是否设置菜单
    */
@@ -141,13 +140,20 @@ Page({
     }
     else if (this.data.list.length > 0) {
       this.randonFood();
-    } else {
+    } else if (this.data.list.length == 0 && this.data.notRepeat) {
+      wx.showToast({
+        title: '菜单已抽完，点击控制面板中“恢复所有菜单项”即可重新抽取',
+        icon: "none"
+      })
+    }
+    else {
       wx.showToast({
         title: '请先点击底部“设置好吃的”设置菜单,再进行抽取',
         icon: "none"
       })
     }
   },
+
   /**
    * 保存抽奖记录
    */
@@ -161,6 +167,7 @@ Page({
     wx.setStorageSync('logs', logs)
     this.getLog();
   },
+
   /**
    * 获取抽奖记录
    */
@@ -174,12 +181,14 @@ Page({
       })
     })
   },
+
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
 
   },
+
   /**
    * 加载美食列表
    */
@@ -189,6 +198,7 @@ Page({
     let menu = menuList[mainIndex]
     this.setData({ list: menu.list, name: menu.name })
   },
+
   /**
    * 清除所有历史记录
    */
@@ -201,19 +211,19 @@ Page({
         if (res.confirm) {
           wx.setStorageSync('logs', [])
           that.getLog();
-        } else if (res.cancel) {
         }
       }
     })
   },
+
   /**
-   * 分享
+   * 跳转至分享
    */
-  toShare(e){
+  toShare(e) {
     let key = e.currentTarget.dataset.result;
-    if(this.data.status=="抽取完成！")
+    if (this.data.status == "抽取完成！")
       wx.navigateTo({
-        url: '../share/share?key='+key,
+        url: '../share/share?key=' + key,
       })
     else
       wx.showToast({

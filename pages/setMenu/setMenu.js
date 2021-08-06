@@ -19,27 +19,15 @@ Page({
   onLoad: function (options) {
     this.initData();
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
+  
   onShow: function () {
     this.initData()
   },
+
   /**
    * 初始化
    */
-  initData(){
+  initData() {
     this.loadMenuList();
     this.loadMainMenu();
   },
@@ -47,58 +35,62 @@ Page({
   /**
    * 加载菜单列表
    */
-  loadMenuList(){
+  loadMenuList() {
     const menuList = wx.getStorageSync('menuList') || [];
     this.setData({
       menuList: menuList
     })
   },
+
   /**
    * 保存菜单列表
    */
-  saveMenuList(){
+  saveMenuList() {
     wx.setStorageSync('menuList', this.data.menuList)
   },
+
   /**
    * 获取主菜单
    */
-  loadMainMenu(){
+  loadMainMenu() {
     var main = wx.getStorageSync('mainMenu') || 0;
-    this.setData({mainMenuIndex: main,mainMenu: this.data.menuList[main]});
+    this.setData({ mainMenuIndex: main, mainMenu: this.data.menuList[main] });
   },
+
   /**
    * 设置主菜单
    */
-  saveMainMenu(e){
+  saveMainMenu(e) {
     var index = e.currentTarget.dataset.id;
     wx.setStorageSync('mainMenu', index);
     this.loadMainMenu();
   },
+
   /**
    * 删除菜单
    */
-  delMenu(e){
+  delMenu(e) {
     // 要删除菜单的id
     var index = e.currentTarget.dataset.id;
     // 当前主菜单的id
     var main = this.data.mainMenuIndex;
     // 无法删除主菜单
-    if(index==main){
+    if (index == main) {
       wx.showModal({
         showCancel: false,
         title: "温馨提示",
         content: "无法删除主菜单"
       })
-    }else if(index<main){
+    } else if (index < main) {
       // 如果删除菜单的值小于主菜单的值，主菜单的值减一
-      this.data.menuList.splice(index,1);
+      this.data.menuList.splice(index, 1);
       this.saveMenuList();
       main--;
       this.saveMainMenu(main);
       this.loadMenuList();
-    }else{
+    } else {
       // 删除
-      this.data.menuList.splice(index,1);
+      this.data.menuList.splice(index, 1);
       this.saveMenuList();
       this.loadMenuList();
     }
@@ -106,7 +98,7 @@ Page({
   /**
    * 编辑操作 - 跳转编辑菜单页面
    */
-  editMenu(e){
+  editMenu(e) {
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: '../editMenu/editMenu?id=' + id,
@@ -115,7 +107,7 @@ Page({
   /**
    * 创建新菜单
    */
-  createMenu(){
+  createMenu() {
     wx.navigateTo({
       url: '../editMenu/editMenu',
     })
