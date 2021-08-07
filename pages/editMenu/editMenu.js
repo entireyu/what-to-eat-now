@@ -36,14 +36,25 @@ Page({
    * 处理用户输入
    */
   dueInput(e) {
-    var list = e.detail.value.split(" ")
-    // 取出空元素
-    for (let i = 0; i < list.length; i++) {
-      if (list[i] == "" || list[i] == " ") {
-        list.splice(i, 1);
-        i--;
-      }
-    }
+    // 用户输入的字符串
+    let userInput = e.detail.value;
+
+    // 正则表达式(剔除连续空格)
+    let reg = /\s{2,}/g;
+    
+    // 替换空格
+    userInput = (userInput.replace(reg," "));
+
+    // 正则表达式(替换最后的空格）
+    reg = /\s$/g;
+
+    // 剔除空格
+    userInput = (userInput.replace(reg,""));
+
+    // 转化成Array
+    let list = userInput.split(" ")
+
+    // 设置数据
     this.setData({ menu: list });
   },
 

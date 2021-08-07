@@ -121,6 +121,10 @@ Page({
   showResult(result) {
     this.setData({ status: "抽取完成！", result: result })
     this.saveLog(result)
+    // 震动提示抽取完成
+    wx.vibrateShort({
+      type: 'heavy',
+    })
     wx.showModal({
       title: "这顿吃这个好不？",
       content: result,
@@ -132,6 +136,10 @@ Page({
    * 检查是否设置菜单
    */
   checkList() {
+    // 点击抽奖按钮震动提示
+    wx.vibrateShort({
+      type: 'medium',
+    })
     if (this.data.status == "抽取中") {
       wx.showToast({
         title: '正在抽取中，请勿继续点击',
